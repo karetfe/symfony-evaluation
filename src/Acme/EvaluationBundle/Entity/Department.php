@@ -1,24 +1,24 @@
 <?php
-namespace Acme\TaskBundle\Entity;
+namespace Acme\EvaluationBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Class Position
+ * Class Department
  * @ORM\Entity
- * @ORM\Table(name="positions")
+ * @ORM\Table(name="departments")
  */
-class Position {
+class Department {
 
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer", name="pid")
+     * @ORM\Column(type="integer", name="did")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @ORM\Column(name="position_name", type="string", length=80)
+     * @ORM\Column(name="department_name", type="string", length=80)
      */
     protected $name;
 
@@ -39,7 +39,7 @@ class Position {
     /**
      * Set name
      * @param string $name
-     * @return Position
+     * @return Department
      */
     public function setName($name)
     {

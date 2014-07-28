@@ -1,46 +1,30 @@
 <?php
-namespace Acme\TaskBundle\Entity;
+namespace Acme\EvaluationBundle\Entity;
 
-use Symfony\Component\Security\Core\Role\RoleInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * Class Position
  * @ORM\Entity
- * @ORM\Table(name="user_roles")
+ * @ORM\Table(name="positions")
  */
-class Role implements RoleInterface
-{
+class Position {
+
     /**
      * @ORM\Id
-     * @ORM\Column(type="integer", name="rid")
+     * @ORM\Column(type="integer", name="pid")
      * @ORM\GeneratedValue(strategy="AUTO")
      */
     protected $id;
 
     /**
-     * @ORM\Column(name="role_name", type="string", length=50)
+     * @ORM\Column(name="position_name", type="string", length=80)
      */
     protected $name;
-
 
     public function __construct($name)
     {
         $this->name = $name;
-    }
-
-    /**
-     * Returns the role.
-     *
-     * This method returns a string representation whenever possible.
-     *
-     * When the role cannot be represented with sufficient precision by a
-     * string, it should return null.
-     *
-     * @return string|null A string representation of the role, or null
-     */
-    public function getRole()
-    {
-        return $this->name;
     }
 
     /**
@@ -55,7 +39,7 @@ class Role implements RoleInterface
     /**
      * Set name
      * @param string $name
-     * @return Role
+     * @return Position
      */
     public function setName($name)
     {
@@ -66,6 +50,7 @@ class Role implements RoleInterface
 
     /**
      * Get name
+     *
      * @return string
      */
     public function getName()

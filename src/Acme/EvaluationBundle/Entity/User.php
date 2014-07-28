@@ -1,8 +1,8 @@
 <?php
 
-namespace Acme\TaskBundle\Entity;
+namespace Acme\EvaluationBundle\Entity;
 
-use Acme\TaskBundle\Entity\Role;
+use Acme\EvaluationBundle\Entity\Role;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Doctrine\Common\Collections\Collection;
@@ -14,7 +14,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="users")
  * @ORM\Entity
  */
-class User implements UserInterface{
+class User implements UserInterface
+{
 
 
     /**
@@ -85,33 +86,6 @@ class User implements UserInterface{
     protected $roles;
 
     /**
-     * @ORM\ManyToMany(targetEntity="Company")
-     * @ORM\JoinTable(name="positions_map",
-     *     joinColumns={@ORM\JoinColumn(name="uid", referencedColumnName="uid")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="cid", referencedColumnName="cid")}
-     * )
-     */
-  //  protected $companies;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Position")
-     * @ORM\JoinTable(name="positions_map",
-     *     joinColumns={@ORM\JoinColumn(name="uid", referencedColumnName="uid")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="pid", referencedColumnName="pid")}
-     * )
-     */
-    protected $positions;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="Department")
-     * @ORM\JoinTable(name="positions_map",
-     *     joinColumns={@ORM\JoinColumn(name="uid", referencedColumnName="uid")},
-     *     inverseJoinColumns={@ORM\JoinColumn(name="did", referencedColumnName="did")}
-     * )
-     */
-   // protected $departments;
-
-    /**
      * @ORM\ManyToMany(targetEntity="User")
      * @ORM\JoinTable(name="users_managers",
      *     joinColumns={@ORM\JoinColumn(name="uid", referencedColumnName="uid")},
@@ -121,17 +95,14 @@ class User implements UserInterface{
     protected $managers;
 
 
+
     public function __construct()
     {
         $this->roles = new ArrayCollection();
-        $this->companies = new ArrayCollection();
-        $this->positions = new ArrayCollection();
-        $this->departments = new ArrayCollection();
         $this->managers = new ArrayCollection();
+        $this->questions = new ArrayCollection();
 
     }
-
-
 
 
     public function getRoles()
@@ -199,7 +170,7 @@ class User implements UserInterface{
     /**
      * Get id
      *
-     * @return integer 
+     * @return integer
      */
     public function getId()
     {
@@ -248,7 +219,7 @@ class User implements UserInterface{
     /**
      * Get email
      *
-     * @return string 
+     * @return string
      */
     public function getEmail()
     {
@@ -271,7 +242,7 @@ class User implements UserInterface{
     /**
      * Get name
      *
-     * @return string 
+     * @return string
      */
     public function getName()
     {
@@ -294,7 +265,7 @@ class User implements UserInterface{
     /**
      * Get created
      *
-     * @return \DateTime 
+     * @return \DateTime
      */
     public function getCreated()
     {
@@ -317,7 +288,7 @@ class User implements UserInterface{
     /**
      * Get status
      *
-     * @return integer 
+     * @return integer
      */
     public function getStatus()
     {
@@ -327,10 +298,10 @@ class User implements UserInterface{
     /**
      * Add companies
      *
-     * @param \Acme\TaskBundle\Entity\Company $companies
+     * @param \Acme\EvaluationBundle\Entity\Company $companies
      * @return User
      */
-    public function addCompany(\Acme\TaskBundle\Entity\Company $companies)
+    public function addCompany(\Acme\EvaluationBundle\Entity\Company $companies)
     {
         $this->companies[] = $companies;
 
@@ -340,9 +311,9 @@ class User implements UserInterface{
     /**
      * Remove companies
      *
-     * @param \Acme\TaskBundle\Entity\Company $companies
+     * @param \Acme\EvaluationBundle\Entity\Company $companies
      */
-    public function removeCompany(\Acme\TaskBundle\Entity\Company $companies)
+    public function removeCompany(\Acme\EvaluationBundle\Entity\Company $companies)
     {
         $this->companies->removeElement($companies);
     }
@@ -350,7 +321,7 @@ class User implements UserInterface{
     /**
      * Get companies
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getCompanies()
     {
@@ -360,10 +331,10 @@ class User implements UserInterface{
     /**
      * Add positions
      *
-     * @param \Acme\TaskBundle\Entity\Position $positions
+     * @param \Acme\EvaluationBundle\Entity\Position $positions
      * @return User
      */
-    public function addPosition(\Acme\TaskBundle\Entity\Position $positions)
+    public function addPosition(\Acme\EvaluationBundle\Entity\Position $positions)
     {
         $this->positions[] = $positions;
 
@@ -373,9 +344,9 @@ class User implements UserInterface{
     /**
      * Remove positions
      *
-     * @param \Acme\TaskBundle\Entity\Position $positions
+     * @param \Acme\EvaluationBundle\Entity\Position $positions
      */
-    public function removePosition(\Acme\TaskBundle\Entity\Position $positions)
+    public function removePosition(\Acme\EvaluationBundle\Entity\Position $positions)
     {
         $this->positions->removeElement($positions);
     }
@@ -383,7 +354,7 @@ class User implements UserInterface{
     /**
      * Get positions
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getPositions()
     {
@@ -393,10 +364,10 @@ class User implements UserInterface{
     /**
      * Add departments
      *
-     * @param \Acme\TaskBundle\Entity\Department $departments
+     * @param \Acme\EvaluationBundle\Entity\Department $departments
      * @return User
      */
-    public function addDepartment(\Acme\TaskBundle\Entity\Department $departments)
+    public function addDepartment(\Acme\EvaluationBundle\Entity\Department $departments)
     {
         $this->departments[] = $departments;
 
@@ -406,9 +377,9 @@ class User implements UserInterface{
     /**
      * Remove departments
      *
-     * @param \Acme\TaskBundle\Entity\Department $departments
+     * @param \Acme\EvaluationBundle\Entity\Department $departments
      */
-    public function removeDepartment(\Acme\TaskBundle\Entity\Department $departments)
+    public function removeDepartment(\Acme\EvaluationBundle\Entity\Department $departments)
     {
         $this->departments->removeElement($departments);
     }
@@ -416,7 +387,7 @@ class User implements UserInterface{
     /**
      * Get departments
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getDepartments()
     {
@@ -426,10 +397,10 @@ class User implements UserInterface{
     /**
      * Add managers
      *
-     * @param \Acme\TaskBundle\Entity\User $managers
+     * @param \Acme\EvaluationBundle\Entity\User $managers
      * @return User
      */
-    public function addManager(\Acme\TaskBundle\Entity\User $managers)
+    public function addManager(\Acme\EvaluationBundle\Entity\User $managers)
     {
         $this->managers[] = $managers;
 
@@ -439,9 +410,9 @@ class User implements UserInterface{
     /**
      * Remove managers
      *
-     * @param \Acme\TaskBundle\Entity\User $managers
+     * @param \Acme\EvaluationBundle\Entity\User $managers
      */
-    public function removeManager(\Acme\TaskBundle\Entity\User $managers)
+    public function removeManager(\Acme\EvaluationBundle\Entity\User $managers)
     {
         $this->managers->removeElement($managers);
     }
@@ -449,7 +420,7 @@ class User implements UserInterface{
     /**
      * Get managers
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
     public function getManagers()
     {
