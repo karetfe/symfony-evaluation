@@ -1,3 +1,7 @@
-acme_task_homepage:
-    path:     /hello/{name}
-    defaults: { _controller: AcmeEvaluationBundle:Default:index }
+homepage:
+    path:     /
+    defaults: { _controller: AcmeEvaluationBundle:Evaluation:index }
+
+register:
+    path:     /register
+    defaults: { _controller: AcmeEvaluationBundle:Evaluation:register }

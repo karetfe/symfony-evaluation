@@ -26,11 +26,6 @@ class User implements UserInterface
     protected $id;
 
     /**
-     * @Assert\NotBlank
-     * @Assert\Length(
-     *      min="5",
-     *      minMessage="Your username must have at least 5 characters !"
-     * )
      * @ORM\Column(type="string", length=30, unique=true)
      */
     protected $username;
@@ -49,6 +44,7 @@ class User implements UserInterface
 
     /**
      * @ORM\Column(type="string", length=60, unique=true)
+     * @Assert\NotBlank
      * @Assert\Email(
      *     message = "The email '{{ value }}' is not a valid email."
      * )
